@@ -1,0 +1,6 @@
+Flask
+pymongo[srv]
+dnspython
+python-dotenv
+Flask-WTF
+email-validator
