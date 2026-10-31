@@ -1,13 +1,34 @@
-import os
-
+from flask import current_app
 from pymongo import MongoClient
-from dotenv import load_dotenv
+from pymongo.errors import PyMongoError
 
-load_dotenv()
+_client = None
+_database = None
 
-client = MongoClient(os.getenv("MONGO_URI"))
 
-database = client[os.getenv("MONGO_DATABASE", "mostratec")]
+def init_database(app):
+    global _client, _database
+
+    uri = app.config.get("MONGO_URI")
+    if not uri:
+        app.logger.warning("MONGO_URI não configurada. Configure o arquivo .env.")
+        return
+
+    try:
+        _client = MongoClient(uri, serverSelectionTimeoutMS=5000)
+        _client.admin.command("ping")
+        _database = _client[app.config["MONGO_DATABASE"]]
+        app.logger.info("Conexão com MongoDB Atlas estabelecida.")
+    except PyMongoError:
+        app.logger.exception("Não foi possível conectar ao MongoDB Atlas.")
+        _client = None
+        _database = None
+
 
 def get_database():
-    return database
+    if _database is None:
+        raise RuntimeError(
+            "Banco de dados indisponível. Verifique MONGO_URI, usuário, senha "
+            "e Network Access no MongoDB Atlas."
+        )
+    return _database

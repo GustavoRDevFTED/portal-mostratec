@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Nossa história | MostraTec Uniube{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">NOSSA TRAJETÓRIA</span><h1>Uma história feita de <em>ideias e conquistas.</em></h1><p>Relembre as edições, conheça as equipes e descubra os projetos que marcaram o MostraTec.</p></div></section>
+<section class="section"><div class="container">
+  {% if editions %}
+    <div class="timeline">
+      {% for edition in editions %}
+        <article class="timeline-item">
+          <div class="timeline-year">{{ edition.year or '—' }}</div>
+          <div class="timeline-content">
+            <span class="eyebrow">EDIÇÃO MOSTRATEC</span><h2>{{ edition.title or ('Edição ' ~ edition.year) }}</h2>
+            <p>{{ edition.description or 'Uma edição dedicada à criatividade, pesquisa e inovação.' }}</p>
+            {% if edition.cover_image %}<img class="edition-image" src="{{ edition.cover_image }}" alt="{{ edition.title or 'Fotografia da edição' }}">{% endif %}
+            {% set edition_projects = projects_by_edition.get(edition._id|string, []) %}
+            {% if edition_projects %}
+              <h3 class="subheading">Projetos e equipes em destaque</h3>
+              <div class="card-grid">
+                {% for project in edition_projects %}
+                  <article class="content-card compact-card">
+                    {% if project.image_url %}<img class="card-image" src="{{ project.image_url }}" alt="{{ project.name }}">{% endif %}
+                    <div class="card-body"><span class="card-kicker">{{ '🏆 PROJETO PREMIADO' if project.is_winner else 'PROJETO' }}</span><h3>{{ project.name }}</h3><p>{{ project.description }}</p><p class="muted">{{ project.team_name or 'Equipe participante' }}</p></div>
+                  </article>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><span>⌛</span><h2>A história está sendo construída.</h2><p>As edições anteriores serão apresentadas aqui com suas fotografias, equipes vencedoras e projetos.</p></div>
+  {% endif %}
+</div></section>
+{% endblock %}

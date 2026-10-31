@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Artigos científicos | MostraTec Uniube{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">PRODUÇÃO ACADÊMICA</span><h1>Conhecimento que gera <em>transformação.</em></h1><p>Conheça os artigos produzidos a partir dos projetos do MostraTec e entenda os problemas reais que motivaram cada solução.</p></div></section>
+<section class="section"><div class="container">
+  {% if articles %}
+    <div class="article-list">
+      {% for article in articles %}
+        <article class="article-card">
+          <div class="article-number">{{ '%02d'|format(loop.index) }}</div>
+          <div class="article-content"><span class="card-kicker">{{ article.project_name or 'PESQUISA MOSTRATEC' }}</span><h2>{{ article.title }}</h2><p>{{ article.abstract }}</p>
+            {% if article.market_problem %}<div class="problem-box"><strong>Problema de mercado</strong><p>{{ article.market_problem }}</p></div>{% endif %}
+            <div class="article-meta"><span>Autores: {{ article.authors|join(', ') if article.authors else 'Não informado' }}</span>{% if article.year %}<span>{{ article.year }}</span>{% endif %}</div>
+            {% if article.pdf_url %}<a class="button button-outline" href="{{ article.pdf_url }}" target="_blank" rel="noopener">Ler artigo completo ↗</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><span>▤</span><h2>Artigos científicos em breve.</h2><p>Os trabalhos publicados serão organizados aqui com resumo, autores, metodologia, resultados e acesso ao documento completo.</p></div>
+  {% endif %}
+</div></section>
+{% endblock %}

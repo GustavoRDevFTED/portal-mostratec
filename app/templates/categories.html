@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Categorias | MostraTec Uniube{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">MODALIDADES</span><h1>Quatro caminhos para <em>inovar.</em></h1><p>Cada categoria valoriza competências e formas diferentes de transformar conhecimento em soluções.</p></div></section>
+<section class="section"><div class="container">
+  {% if categories %}
+    <div class="category-grid">
+      {% for category in categories %}
+        <article class="category-card"><span class="category-index">{{ '%02d'|format(loop.index) }}</span><div class="category-symbol">{{ category.icon or '✳' }}</div><h2>{{ category.name }}</h2><p>{{ category.description }}</p>
+          {% if category.skills %}<h3>Habilidades e competências</h3><ul>{% for skill in category.skills %}<li>{{ skill }}</li>{% endfor %}</ul>{% endif %}
+          {% if category.requirements %}<div class="requirements"><strong>Características</strong><p>{{ category.requirements }}</p></div>{% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="category-grid">
+      <article class="category-card"><span class="category-index">01</span><div class="category-symbol">✳</div><h2>Iniciante</h2><p>Projetos introdutórios que demonstram os primeiros passos na criação de soluções tecnológicas.</p><h3>Competências</h3><ul><li>Lógica de programação</li><li>Criatividade e experimentação</li><li>Resolução de problemas básicos</li></ul></article>
+      <article class="category-card"><span class="category-index">02</span><div class="category-symbol">⌕</div><h2>Científico</h2><p>Projetos orientados por pesquisa, investigação e aplicação de metodologia científica.</p><h3>Competências</h3><ul><li>Pesquisa e fundamentação teórica</li><li>Metodologia e análise de dados</li><li>Experimentação e validação</li></ul></article>
+      <article class="category-card"><span class="category-index">03</span><div class="category-symbol">↗</div><h2>Comercial</h2><p>Soluções que identificam oportunidades e atendem necessidades de empresas e consumidores.</p><h3>Competências</h3><ul><li>Visão de negócio e mercado</li><li>Proposta de valor</li><li>Viabilidade e experiência do usuário</li></ul></article>
+      <article class="category-card"><span class="category-index">04</span><div class="category-symbol">⌘</div><h2>Embarcado</h2><p>Projetos que integram software e hardware para controlar dispositivos e processos físicos.</p><h3>Competências</h3><ul><li>Eletrônica e microcontroladores</li><li>Sensores e automação</li><li>Integração entre hardware e software</li></ul></article>
+    </div>
+  {% endif %}
+</div></section>
+{% endblock %}
