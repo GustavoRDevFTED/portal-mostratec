@@ -1,50 +1,166 @@
+
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MostraTec Uniube — ciência, tecnologia e inovação.">
+
+  <meta
+    name="description"
+    content="MostraTec Uniube Uberlândia — 6ª Mostra de Projetos dos Cursos da Área de Tecnologia."
+  >
+
   <title>{% block title %}MostraTec | Uniube{% endblock %}</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+  >
 </head>
+
 <body>
+
 <header class="site-header">
+
   <div class="container nav-wrap">
-    <a class="brand" href="{{ url_for('home.index') }}">
-      <span class="brand-mark">M</span>
-      <span>MostraTec<small>UNIUBE</small></span>
+
+    <!-- Brasão oficial da Uniube -->
+    <a href="{{ url_for('home.index') }}" class="brand">
+      <img
+        src="{{ url_for('static', filename='images/logo_uniube.png') }}"
+        alt="Universidade de Uberaba - Uniube"
+        class="brand-logo"
+      >
     </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+    <!-- Menu para dispositivos móveis -->
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <!-- Navegação principal -->
     <nav class="main-nav" id="mainNav">
-      <a href="{{ url_for('home.index') }}" class="{{ 'active' if request.endpoint == 'home.index' else '' }}">Início</a>
-      <a href="{{ url_for('history.index') }}" class="{{ 'active' if request.endpoint == 'history.index' else '' }}">Nossa história</a>
-      <a href="{{ url_for('articles.index') }}" class="{{ 'active' if request.endpoint == 'articles.index' else '' }}">Artigos científicos</a>
-      <a href="{{ url_for('categories.index') }}" class="{{ 'active' if request.endpoint == 'categories.index' else '' }}">Categorias</a>
+
+      <a
+        href="{{ url_for('home.index') }}"
+        class="{{ 'active' if request.endpoint == 'home.index' else '' }}"
+      >
+        Início
+      </a>
+
+      <a
+        href="{{ url_for('history.index') }}"
+        class="{{ 'active' if request.endpoint == 'history.index' else '' }}"
+      >
+        Nossa história
+      </a>
+
+      <a
+        href="{{ url_for('articles.index') }}"
+        class="{{ 'active' if request.endpoint == 'articles.index' else '' }}"
+      >
+        Artigos científicos
+      </a>
+
+      <a
+        href="{{ url_for('categories.index') }}"
+        class="{{ 'active' if request.endpoint == 'categories.index' else '' }}"
+      >
+        Categorias
+      </a>
+
+      <!-- Formulário oficial da MostraTec -->
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSe6fv8VETHkA02A1-f9LgYMC1Iua0Fyyk9W8SDoio_W1q9VbA/viewform?pli=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-register"
+      >
+        Inscreva-se ↗
+      </a>
+
     </nav>
+
   </div>
+
 </header>
 
-<main>{% block content %}{% endblock %}</main>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
 
 <footer class="site-footer">
+
   <div class="container footer-content">
+
     <div>
-      <a class="brand brand-light" href="{{ url_for('home.index') }}">
-        <span class="brand-mark">M</span><span>MostraTec<small>UNIUBE</small></span>
+
+      <!-- Identidade institucional Uniube -->
+      <a
+        class="brand brand-light"
+        href="{{ url_for('home.index') }}"
+      >
+        <img
+          src="{{ url_for('static', filename='images/logo_uniube.png') }}"
+          alt="Universidade de Uberaba - Uniube"
+          class="brand-logo footer-logo"
+        >
       </a>
-      <p>Ciência, tecnologia e inovação construídas na universidade.</p>
+
+      <p>
+        Ciência, tecnologia e inovação construídas na universidade.
+      </p>
+
+      <p>
+        6ª MostraTec — Mostra de Projetos dos Cursos da Área de Tecnologia.
+      </p>
+
     </div>
+
     <div class="footer-links">
+
       <a href="{{ url_for('history.index') }}">História</a>
+
       <a href="{{ url_for('articles.index') }}">Artigos</a>
+
       <a href="{{ url_for('categories.index') }}">Categorias</a>
+
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSe6fv8VETHkA02A1-f9LgYMC1Iua0Fyyk9W8SDoio_W1q9VbA/viewform?pli=1"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Inscrições
+      </a>
+
     </div>
+
   </div>
-  <div class="container copyright">© {{ 2026 }} MostraTec Uniube. Conteúdo institucional.</div>
+
+  <div class="container copyright">
+    © 2026 MostraTec Uniube. Conteúdo institucional.
+  </div>
+
 </footer>
+
+
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
 </html>
