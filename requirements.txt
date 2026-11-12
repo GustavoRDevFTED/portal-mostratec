@@ -4,3 +4,4 @@ dnspython
 python-dotenv
 Flask-WTF
 email-validator
+gunicorn
